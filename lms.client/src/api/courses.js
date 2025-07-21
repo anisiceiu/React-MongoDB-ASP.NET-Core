@@ -108,3 +108,12 @@ export const getCourseEnrollments = async (courseId) => {
         throw error.response?.data || error.message;
     }
 };
+
+export const getMyEnrollments = async () => {
+    try {
+        const response = await api.get('/courses/my-enrollments');
+        return response.data;
+    } catch (error) {
+        throw error.response.data;
+    }
+};
