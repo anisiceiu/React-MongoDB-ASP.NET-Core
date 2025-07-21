@@ -246,62 +246,23 @@ const InstructorDashboard = () => {
                 onSelect={(k) => setActiveTab(k)}
                 className="mb-3"
             >
-            {/*    <Tab eventKey="overview" title="Overview">*/}
-            {/*        <Row className="mb-4">*/}
-            {/*            <Col lg={6} className="mb-4">*/}
-            {/*                <Card className="h-100 shadow-sm">*/}
-            {/*                    <Card.Body>*/}
-            {/*                        <Card.Title>Enrollment Trend</Card.Title>*/}
-            {/*                        <Bar*/}
-            {/*                            data={enrollmentChartData}*/}
-            {/*                            options={{*/}
-            {/*                                responsive: true,*/}
-            {/*                                plugins: {*/}
-            {/*                                    legend: {*/}
-            {/*                                        position: 'top',*/}
-            {/*                                    }*/}
-            {/*                                }*/}
-            {/*                            }}*/}
-            {/*                        />*/}
-            {/*                    </Card.Body>*/}
-            {/*                </Card>*/}
-            {/*            </Col>*/}
-            {/*            <Col lg={6} className="mb-4">*/}
-            {/*                <Card className="h-100 shadow-sm">*/}
-            {/*                    <Card.Body>*/}
-            {/*                        <Card.Title>Revenue Trend</Card.Title>*/}
-            {/*                        <Line*/}
-            {/*                            data={revenueChartData}*/}
-            {/*                            options={{*/}
-            {/*                                responsive: true,*/}
-            {/*                                plugins: {*/}
-            {/*                                    legend: {*/}
-            {/*                                        position: 'top',*/}
-            {/*                                    },*/}
-            {/*                                    tooltip: {*/}
-            {/*                                        callbacks: {*/}
-            {/*                                            label: function (context) {*/}
-            {/*                                                return `$${context.raw.toLocaleString()}`;*/}
-            {/*                                            }*/}
-            {/*                                        }*/}
-            {/*                                    }*/}
-            {/*                                },*/}
-            {/*                                scales: {*/}
-            {/*                                    y: {*/}
-            {/*                                        ticks: {*/}
-            {/*                                            callback: function (value) {*/}
-            {/*                                                return `$${value.toLocaleString()}`;*/}
-            {/*                                            }*/}
-            {/*                                        }*/}
-            {/*                                    }*/}
-            {/*                                }*/}
-            {/*                            }}*/}
-            {/*                        />*/}
-            {/*                    </Card.Body>*/}
-            {/*                </Card>*/}
-            {/*            </Col>*/}
-            {/*        </Row>*/}
-            {/*    </Tab>*/}
+                {/*<Tab eventKey="overview" title="Overview">*/}
+                {/*    <Row className="mb-4">*/}
+                {/*        <Col lg={6} className="mb-4">*/}
+                {/*            <Card className="h-100 shadow-sm">*/}
+                {/*                <Card.Body>*/}
+                {/*                    <Card.Title>Enrollment</Card.Title>*/}
+                {/*                        {selectedCourse && (*/}
+                {/*                            <div className="mt-4">*/}
+                {/*                                <h4>Enrollments for {selectedCourse.title}</h4>*/}
+                {/*                                <EnrollmentList courseId={selectedCourse.id} />*/}
+                {/*                            </div>*/}
+                {/*                        )}*/}
+                {/*                </Card.Body>*/}
+                {/*            </Card>*/}
+                {/*        </Col>*/}
+                {/*    </Row>*/}
+                {/*</Tab>*/}
                 <Tab eventKey="courses" title="My Courses">
                     <Card className="shadow-sm">
                         <Card.Body>

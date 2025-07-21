@@ -99,3 +99,12 @@ export const updateCourse = async (id, courseData) => {
         throw error.response.data;
     }
 };
+
+export const getCourseEnrollments = async (courseId) => {
+    try {
+        const response = await api.get(`/courses/${courseId}/enrollments`);
+        return response.data;
+    } catch (error) {
+        throw error.response?.data || error.message;
+    }
+};

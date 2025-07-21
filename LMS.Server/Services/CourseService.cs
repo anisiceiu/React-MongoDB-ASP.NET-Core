@@ -92,5 +92,60 @@ namespace LMS.Server.Services
             await _context.Enrollments.InsertOneAsync(enrollment);
         }
 
+        public async Task<List<Course>> GetEnrolledCoursesAsync(string userId)
+        {
+            var enrollments = await _context.Enrollments
+                .Find(e => e.UserId == userId)
+                .ToListAsync();
+
+            var courseIds = enrollments.Select(e => e.CourseId).ToList();
+
+            if (!courseIds.Any()) return new List<Course>();
+
+            var courses = await _context.Courses
+                .Find(c => courseIds.Contains(c.Id))
+                .ToListAsync();
+
+            return courses;
+        }
+
+        public async Task<List<EnrollmentDto>> GetEnrollmentsByCourseIdAsync(string courseId)
+        {
+            var objectCourseId = ObjectId.Parse(courseId);
+
+            var pipeline = new BsonDocument[]
+ {
+    new BsonDocument("$match", new BsonDocument("CourseId", objectCourseId)),
+
+    new BsonDocument("$lookup", new BsonDocument
+    {
+        { "from", "Users" },
+        { "localField", "UserId" },
+        { "foreignField", "_id" },
+        { "as", "User" }
+    }),
+
+    new BsonDocument("$unwind", "$User"),
+
+    new BsonDocument("$project", new BsonDocument
+    {
+        { "_id", 0 },
+        { "UserId", new BsonDocument("$toString", "$UserId") },  // 👈 Convert to string here
+        { "UserName", "$User.Name" },
+        { "Email", "$User.Email" },
+        { "EnrollmentDate", "$EnrolledAt" },
+        { "CompletionStatus", "$IsCompleted" }
+    })
+ };
+
+
+            var results = await _context.Enrollments
+                .Aggregate<EnrollmentDto>(pipeline)
+                .ToListAsync();
+
+            return results;
+        }
+
+
     }
 }

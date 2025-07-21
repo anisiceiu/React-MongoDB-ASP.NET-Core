@@ -20,6 +20,7 @@ import { setCurrentCourse } from '../../slices/courseSlice';
 import { FaStar, FaRegStar, FaPlay, FaLock, FaCheck } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 import { useAuth } from '../../hooks/useAuth';
+import EnrollmentList from '../../pages/courses/EnrollmentList';
 
 const CourseDetail = () => {
     const { id } = useParams();
@@ -30,6 +31,7 @@ const CourseDetail = () => {
     const [activeTab, setActiveTab] = useState('overview');
     const [isEnrolled, setIsEnrolled] = useState(false);
     const [isEnrolling, setIsEnrolling] = useState(false);
+    const [selectedCourse, setSelectedCourse] = useState(0);
 
     useEffect(() => {
         const getCourse = async () => {
@@ -38,8 +40,9 @@ const CourseDetail = () => {
                 dispatch(setCurrentCourse(course));
 
                 // Check if user is enrolled
-                if (isAuthenticated && user?.enrolledCourses?.includes(course._id)) {
+                if (isAuthenticated && user?.enrolledCourses?.includes(course.id)) {
                     setIsEnrolled(true);
+                    setSelectedCourse(id);
                 }
             } catch (err) {
                 console.error('Failed to fetch course:', err);
@@ -233,6 +236,23 @@ const CourseDetail = () => {
                                     </Card.Body>
                                 </Card>
                             </div>
+                        </Tab>
+                        <Tab eventKey="enroll" title="Enrollments">
+                            <Row className="mb-4">
+                                <Col lg={6} className="mb-4">
+                                    <Card className="h-100 shadow-sm">
+                                        <Card.Body>
+                                           
+                                            {currentCourse && (
+                                                <div className="mt-4">
+                                                    <h4>Enrollments for {currentCourse.title}</h4>
+                                                    <EnrollmentList courseId={currentCourse.id} />
+                                                </div>
+                                            )}
+                                        </Card.Body>
+                                    </Card>
+                                </Col>
+                            </Row>
                         </Tab>
                     </Tabs>
                 </Col>

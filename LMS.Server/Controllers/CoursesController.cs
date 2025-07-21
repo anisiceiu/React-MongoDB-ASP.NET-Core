@@ -106,5 +106,25 @@ namespace LMS.Server.Controllers
                 return BadRequest(new { message = ex.Message });
             }
         }
+
+        [Authorize]
+        [HttpGet("my-enrollments")]
+        public async Task<IActionResult> GetUserEnrollments()
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            var courses = await _courseService.GetEnrolledCoursesAsync(userId);
+            return Ok(courses);
+        }
+
+        [HttpGet("{courseId}/enrollments")]
+        [Authorize(Roles = "admin,instructor")] // Only accessible by admins/instructors
+        public async Task<IActionResult> GetCourseEnrollments(string courseId)
+        {
+            var enrollments = await _courseService.GetEnrollmentsByCourseIdAsync(courseId);
+            return Ok(enrollments);
+        }
     }
 }
