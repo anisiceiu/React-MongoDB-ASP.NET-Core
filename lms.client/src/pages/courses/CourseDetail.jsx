@@ -238,7 +238,7 @@ const CourseDetail = () => {
                 </Col>
 
                 <Col lg={4}>
-                    <Card className="sticky-top" style={{ top: '20px' }}>
+                    <Card style={{ top: '20px' }}>
                         <Card.Body>
                             <div className="text-center mb-3">
                                 <h3>

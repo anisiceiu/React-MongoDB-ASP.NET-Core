@@ -37,6 +37,12 @@ const Header = () => {
                             </>
                         ) : (
                             <NavDropdown title={user?.name} id="username">
+                                 <NavDropdown.Item as={Link} to={
+                                        user?.role === 'student' ? '/dashboard' :
+                                            user?.role === 'instructor' ? '/instructor' : '/admin'
+                                    }>
+                                        My Dashboard
+                                 </NavDropdown.Item>
                                 <NavDropdown.Item as={Link} to="/profile">Profile</NavDropdown.Item>
                                 <NavDropdown.Divider />
                                 <NavDropdown.Item onClick={handleLogout}>Logout</NavDropdown.Item>

@@ -86,5 +86,25 @@ namespace LMS.Server.Controllers
             if (!deleted) return NotFound();
             return NoContent();
         }
+
+        [Authorize(Roles = "student,instructor,admin,Instructor,Admin,Student")]
+        [HttpPost("{courseId}/enroll")]
+        public async Task<IActionResult> Enroll(string courseId)
+        {
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+            if (string.IsNullOrEmpty(userId))
+                return Unauthorized();
+
+            try
+            {
+                await _courseService.EnrollUserAsync(courseId, userId);
+                return Ok(new { message = "Enrollment successful" });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
     }
 }

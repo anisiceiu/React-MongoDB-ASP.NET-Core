@@ -11,5 +11,6 @@ namespace LMS.Server.Interfaces
         Task<bool> UpdateCourseAsync(string courseId, CourseDto dto);
         Task<bool> DeleteCourseAsync(string courseId);
         Task<List<Course>> GetinstructorCoursesByIdAsync(string instructorId);
+        Task EnrollUserAsync(string courseId, string userId);
     }
 }

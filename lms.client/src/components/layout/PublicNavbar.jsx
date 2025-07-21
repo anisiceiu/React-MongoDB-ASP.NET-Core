@@ -13,7 +13,7 @@ const PublicNavbar = () => {
     };
 
     return (
-        <Navbar bg="light" expand="lg" sticky="top" className="shadow-sm">
+        <Navbar bg="light" expand="lg" sticky="top" className="shadow-sm" >
             <Container>
                 <Navbar.Brand as={Link} to="/">
                     {/*<img*/}

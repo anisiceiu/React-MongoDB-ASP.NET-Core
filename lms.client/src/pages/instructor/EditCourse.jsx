@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentCourse } from '../../slices/courseSlice';
 import Loader from '../../components/common/Loader';
+import Layout from '../../components/layout/Layout';
 
 const EditCourse = () => {
     const { id } = useParams();
@@ -63,6 +64,7 @@ const EditCourse = () => {
     if (error) return <Alert variant="danger">{error}</Alert>;
 
     return (
+        <Layout>
         <Container className="py-5">
             <h1 className="mb-4">Edit Course</h1>
             {currentCourse && (
@@ -73,7 +75,8 @@ const EditCourse = () => {
                     error={error}
                 />
             )}
-        </Container>
+            </Container>
+        </Layout>
     );
 };
 

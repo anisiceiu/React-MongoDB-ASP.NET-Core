@@ -71,5 +71,26 @@ namespace LMS.Server.Services
             var result = await _context.Courses.DeleteOneAsync(c => c.Id == courseId);
             return result.DeletedCount > 0;
         }
+
+        public async Task EnrollUserAsync(string courseId, string userId)
+        {
+            var alreadyEnrolled = await _context.Enrollments
+                .Find(e => e.CourseId == courseId && e.UserId == userId)
+                .FirstOrDefaultAsync();
+
+            if (alreadyEnrolled != null)
+            {
+                throw new InvalidOperationException("User already enrolled in this course.");
+            }
+
+            var enrollment = new Enrollment
+            {
+                CourseId = courseId,
+                UserId = userId
+            };
+
+            await _context.Enrollments.InsertOneAsync(enrollment);
+        }
+
     }
 }

@@ -1,10 +1,12 @@
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import Layout from '../../components/layout/Layout';
 
 const Dashboard = () => {
     const { user } = useSelector((state) => state.auth);
 
     return (
+        <Layout>
         <Container className="py-5">
             <h1 className="mb-4">Dashboard</h1>
             <Row>
@@ -27,7 +29,8 @@ const Dashboard = () => {
                     </Card>
                 </Col>
             </Row>
-        </Container>
+            </Container>
+        </Layout>
     );
 };
 
