@@ -12,7 +12,7 @@ const Header = () => {
     };
 
     return (
-        <Navbar bg="primary" variant="dark" expand="lg" collapseOnSelect>
+        <Navbar bg="primary" expand="lg" sticky="top" className="shadow-sm">
             <Container>
                 <Navbar.Brand as={Link} to="/">LMS</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

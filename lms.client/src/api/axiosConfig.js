@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { isTokenValid, clearAuthData } from '../utils/authUtils';
 
 const api = axios.create({
     baseURL: 'https://localhost:7173/api/',
@@ -21,6 +22,8 @@ api.interceptors.response.use((response) => {
 }, (error) => {
     if (error.response.status === 401) {
         // Handle unauthorized access
+        clearAuthData();
+        window.location.href = '/login'; 
     }
     return Promise.reject(error);
 });
