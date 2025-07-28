@@ -107,7 +107,7 @@ namespace LMS.Server.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Roles = "student,Student")]
         [HttpGet("my-enrollments")]
         public async Task<IActionResult> GetUserEnrollments()
         {
